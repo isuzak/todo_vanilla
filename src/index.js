@@ -1,3 +1,4 @@
+import { isDeleteExpression } from "typescript";
 import "./styles.css";
 
 const onClickAdd = () => {
@@ -12,16 +13,39 @@ const onClickAdd = () => {
   const li = document.createElement("li");
   li.innerText = inputText;
 
-  // Create button tag 
+  // Create button tag
+  // completeButton
   const completeButton = document.createElement("button");
   completeButton.innerText = "完了";
   completeButton.addEventListener("click", () => {
-    alert("完了");
-  })
+    // delete parent div tag
+    deleteFromIncompleteList(completeButton.parentNode);
+    // Create complete-list tag
+    const addTarget = completeButton.parentNode;
+    // get todo content text
+    const text = addTarget.firstElementChild.innerText;
+    // Initialize div tag
+    addTarget.textContent = null;
+    // create li tag
+    const li = document.createElement("li");
+    li.innerText = text;
+    // create backButton
+    const backButton = document.createElement("button");
+    backButton.innerText = "戻す";
+    // append child elements
+    addTarget.appendChild(li);
+    addTarget.appendChild(backButton);
+    // create HTML
+    document.getElementById("complete-list").appendChild(addTarget);
+
+  });
+
+  // deleteButton
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "削除";
   deleteButton.addEventListener("click", () => {
-    alert("削除");
+    // delete parent div tag
+    deleteFromIncompleteList(deleteButton.parentNode);
   });
 
   // div append child elements
@@ -31,6 +55,11 @@ const onClickAdd = () => {
 
   // Create HTML tag
   document.getElementById("incomplete-list").appendChild(div);
+
+  // delete from incomplete list
+  const deleteFromIncompleteList = (target) => {
+    document.getElementById("incomplete-list").removeChild(target);
+  }
 
 };
 
