@@ -194,7 +194,37 @@ module.hot.accept(reloadCSS);
 
 require("./styles.css");
 
-document.getElementById("app").innerHTML = "\n<h1>Hello Vanilla!</h1>\n<div>\n  We use the same configuration as Parcel to bundle this sandbox, you can find more\n  info about Parcel \n  <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.\n</div>\n";
+var onClickAdd = function onClickAdd() {
+  var inputText = document.getElementById("add-text").value;
+  document.getElementById("add-text").value = ""; // Create div tag
+
+  var div = document.createElement("div");
+  div.className = "list-row"; // Create li tag
+
+  var li = document.createElement("li");
+  li.innerText = inputText; // Create button tag 
+
+  var completeButton = document.createElement("button");
+  completeButton.innerText = "完了";
+  completeButton.addEventListener("click", function () {
+    alert("完了");
+  });
+  var deleteButton = document.createElement("button");
+  deleteButton.innerText = "削除";
+  deleteButton.addEventListener("click", function () {
+    alert("削除");
+  }); // div append child elements
+
+  div.appendChild(li);
+  div.appendChild(completeButton);
+  div.appendChild(deleteButton); // Create HTML tag
+
+  document.getElementById("incomplete-list").appendChild(div);
+};
+
+document.getElementById("add-button").addEventListener("click", function () {
+  return onClickAdd();
+});
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -223,7 +253,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58368" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
